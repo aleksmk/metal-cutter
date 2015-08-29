@@ -177,6 +177,11 @@ void setOutput(unsigned char pin, unsigned char state) {
     }
 }
 
+unsigned char getOutput(void) {
+    return PORTF;
+}
+
+
 void initEncoder(void) {
     DDRB = 0x00;
     DDRK = 0x00;
