@@ -181,6 +181,21 @@ unsigned char getOutput(void) {
     return PORTF;
 }
 
+unsigned char globalOK(unsigned int inputStates) {  // Return 0 if there is a problem
+    unsigned int MASK = (1 << UNDERPRESSURE) | (1 << OVERPESSURE);
+    unsigned int tmp = inputStates & MASK;
+    if(tmp == MASK)
+        return 0;
+
+    MASK = (1 << LENDSTOP) | (1 << RENDSTOP);
+    tmp = inputStates & MASK;
+    if(tmp == MASK)
+        return 0;
+
+
+    return 1;
+
+}
 
 void initEncoder(void) {
     DDRB = 0x00;

@@ -29,8 +29,8 @@ unsigned long angularPosition;
 #define RMOTOR          3   // -||- right motor
 #define STARTBTN        4   // Start button
 #define STOPBTN         5   // Stop button
-#define LENDSW          6   // Left end switch (from the perspective of looking towards the machine from the front)
-#define RENDSW          7   // Right end switch - the HOME position
+#define LENDSTOP        6   // Left end switch (from the perspective of looking towards the machine from the front)
+#define RENDSTOP        7   // Right end switch - the HOME position
 #define ESTOP           8   // Emergency stop
 #define LSAWEND         9   // Left saw end switch (in the most retracted position)
 #define RSAWEND         10  // Right saw end switch
