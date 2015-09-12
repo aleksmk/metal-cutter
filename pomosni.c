@@ -27,7 +27,7 @@ unsigned char scanKeypad(void) {
     unsigned int newKeyboardState = 0;
     unsigned char tmp = 0;
 
-    // Што има на првата редица:
+    // Што има на првата колона:
     PORTL |= (1 << PL5);
     _delay_us(100);
     tmp = (PINL & 0x1F);
@@ -36,7 +36,7 @@ unsigned char scanKeypad(void) {
 //    printf("Prva redica : %X\n", tmp);
 //    printf("newKeyboardState = %X\n", newKeyboardState);
 
-    // Што има на втората редица:
+    // Што има на втората колона:
     PORTL |= (1 << PL6);
     _delay_us(100);
     tmp = (PINL & 0x1F);
@@ -45,7 +45,7 @@ unsigned char scanKeypad(void) {
 //    printf("Vtora redica : %X\n", tmp);
 //    printf("newKeyboardState = %X\n", newKeyboardState);
 
-    // Што има на третата редица:
+    // Што има на третата колона:
     PORTL |= (1 << PL7);
     _delay_us(100);
     tmp = (PINL & 0x1F);
