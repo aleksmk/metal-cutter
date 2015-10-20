@@ -222,7 +222,7 @@ ISR(PCINT0_vect) {
 
 
     // Принтање
-    printf("angularPosition = %lu\n", angularPosition);
+    //printf("angularPosition = %lu\n", angularPosition);
 }
 
 ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));
