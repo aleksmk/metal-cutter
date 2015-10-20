@@ -25,7 +25,7 @@ unsigned long angularPosition;
 // Global INPUTs definitions {0 .. 15}
 #define LBTN            0   // Left button for the saws
 #define RBTN            1   // Right button for th saws
-#define LMOTOR          2   // Input to chech if the left saw motor is running
+#define LMOTOR          2   // Input to check if the left saw motor is running
 #define RMOTOR          3   // -||- right motor
 #define STARTBTN        4   // Start button
 #define STOPBTN         5   // Stop button
