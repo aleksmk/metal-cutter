@@ -18,7 +18,7 @@ unsigned char scanKeypad(void);
 void lcd_printStatus(char *);
 void lcd_clearChars(unsigned char);
 
-// Функции за влезно/излезните плочки
+// TODO // Функции за влезно/излезните плочки
 void initOutputs(void);
 void initInputs(void);
 unsigned int getInputs(void);
@@ -26,6 +26,8 @@ void setOutput(unsigned char, unsigned char); // Output, State{ON, OFF}
 unsigned char getOutput(void); // Прочитај ја портата. Треба ова воопшто?
 
 // Функции за AD конверторот за читење на струјата на моторот и тахометарот
+void initADC(void);
+unsigned int getrawADC(unsigned char);
 float getMotorCurrent(void);
 float getTachoSpeed(void);
 

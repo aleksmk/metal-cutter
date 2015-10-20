@@ -210,3 +210,44 @@ void initEncoder(void) {
     // Interrupt banks :
     PCICR |= (1 << PCIE0) | (1 << PCIE1) | (1 << PCIE2);
 }
+
+// ADC functions
+
+void initADC(void) {
+    // Set AVcc reference for the ADC
+    ADMUX |= (1 << REFS0);
+
+    // Enable the ADC
+    ADCSRA |= (1<<ADEN);
+
+    // Set the ADC prescaler to 1:128
+    ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
+
+    // Disable the digital buffers for ADC0 and ADC1 pins
+    DIDR0 |= (1 << ADC0D) | (1 << ADC1D);
+}
+
+// Initiate and get a RAW ADC value from the A/D
+unsigned int getrawADC(unsigned char channel) {
+    unsigned int readOut = 0;
+    unsigned long value = 0;
+
+    // First, select the channel
+    if(channel == 0) {
+        ADMUX &= ~(1 << 0);
+    } else if (channel == 1) {
+        ADMUX |= (1 << MUX0);
+    }
+
+    // Make 10 conversions
+    for(unsigned char i=0; i<10; i++) {
+        // Start the ADC conversion
+        ADCSRA |= (1<<ADSC);
+        while(ADCSRA & (1<<ADSC)){};
+        readOut = ADC;
+        value += readOut;
+    }
+
+    // Return the average value
+    return round(value/10);
+}
