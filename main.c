@@ -44,9 +44,17 @@ int main(void) {
     //PCINT0_vect();
     // Привремен код за тестирање
     //cli();
+    sei();
+
+    char niza[6];
 
     while(1) {
-
+        _delay_ms(10);
+        lcd_goto(0x0B);
+        lcd_clearChars(9);
+        lcd_goto(0x0B);
+        sprintf(niza, "%lu", angularPosition);
+        lcd_puts(niza);
     }
 
 
