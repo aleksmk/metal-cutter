@@ -37,4 +37,7 @@ unsigned char globalOK(unsigned int);
 // Функција за подесување на влезните пинови за енкодерот и соодветните интерапти
 void initEncoder(void);
 
+// Функции за мотор
+void initPWM(void);
+
 #endif
