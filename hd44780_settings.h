@@ -21,6 +21,7 @@
   #define LCD_DB3_PIN            3
 #endif
 
+// TODO ! Врати ги за едно назад !
 #define LCD_DB4_PORT             PORTH       // If using 4 bit omde, yo umust configure DB4-DB7
 #define LCD_DB4_PIN              2
 #define LCD_DB5_PORT             PORTH
@@ -29,6 +30,17 @@
 #define LCD_DB6_PIN              4
 #define LCD_DB7_PORT             PORTH
 #define LCD_DB7_PIN              5
+
+/* TODO ЗА АРДУИНО !!! TODO
+#define LCD_DB4_PORT             PORTH       // If using 4 bit omde, yo umust configure DB4-DB7
+#define LCD_DB4_PIN              3
+#define LCD_DB5_PORT             PORTH
+#define LCD_DB5_PIN              4
+#define LCD_DB6_PORT             PORTH
+#define LCD_DB6_PIN              5
+#define LCD_DB7_PORT             PORTH
+#define LCD_DB7_PIN              6
+*/
 
 #define LCD_RS_PORT              PORTH       // Port for RS line
 #define LCD_RS_PIN               0           // Pin for RS line

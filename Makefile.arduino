@@ -21,6 +21,7 @@ TARGET = main
 
 # Programming hardware: type `avrdude -c ?` to get a full listing.
 AVRDUDE_PROGRAMMER = wiring
+#AVRDUDE_PROGRAMMER = stk500v2
 
 # Port to which the programmer is connected
 AVRDUDE_PORT = /dev/ttyACM0
@@ -128,7 +129,7 @@ AVRDUDE_FLAGS += -P $(AVRDUDE_PORT)
 
 # Uncomment the following if you are using arduino (or any other programmer
 # that needs custom baud rate) as a programmer.
-AVRDUDE_FLAGS += -b 115200
+AVRDUDE_FLAGS += -b 115200 -D
 
 # Uncomment the following if you want avrdude's erase cycle counter.
 # Note that this counter needs to be initialized first using -Yn,

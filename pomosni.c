@@ -73,6 +73,7 @@ unsigned char scanKeypad(void) {
     }
 
     // Доколку сѐ е во ред, може да видиме кое копче е кликнато.
+    printf("newKeyboardState = %d\n", newKeyboardState);
     switch(newKeyboardState) {
         case 0x4000 :
                     tmp = 0x0C;
@@ -124,6 +125,7 @@ unsigned char scanKeypad(void) {
                     break;
     }
     oldKeyboardState = newKeyboardState;
+    printf("tmp = %d\n", tmp);
     return tmp;
 }
 
@@ -146,9 +148,12 @@ void lcd_clearChars(unsigned char n) {
 // Функции за влезовите и излезовите
 
 void initOutputs(void) {
-    // Подеси го DDRF = 0xFF - Сите се излези. Сите ги исчисти и симни на 0.
-    DDRF = 0xFF;
+    // Подеси го DDRF = 0b11111100 и DDRG = 0b11
+    DDRF = 0xFC;
     PORTF = 0x00;
+    
+    DDRG = 0x03;
+    PORTF &= ~(0x03);
 }
 
 void initInputs(void) {
@@ -169,19 +174,29 @@ unsigned int getInputs(void) {
     return tmp;
 }
 
-void setOutput(unsigned char pin, unsigned char state) {
+void setOutput(unsigned char pin, unsigned char state) { //
     if(0 == state) {
-        PORTF &= ~(1 << pin);
+        if(pin >= 2) {
+            PORTF &= ~(1 << pin);
+        } else {
+            PORTG &= ~(1 << pin);
+        }
     } else {
-        PORTF |= (1 << pin);
+        if(pin >= 2) {
+            PORTF |= (1 << pin);
+        } else {
+            PORTG |= (1 << pin);
+        }
     }
 }
 
-unsigned char getOutput(void) {
-    return PORTF;
+unsigned char getOutput(void) { //
+    return (PORTF & 0xFC) + (PORTG & 0x03);
 }
 
 unsigned char globalOK(unsigned int inputStates) {  // Return 0 if there is a problem
+
+    /*
     unsigned int MASK = (1 << UNDERPRESSURE) | (1 << OVERPESSURE);
     unsigned int tmp = inputStates & MASK;
     if(tmp == MASK)
@@ -194,6 +209,7 @@ unsigned char globalOK(unsigned int inputStates) {  // Return 0 if there is a pr
 
 
     return 1;
+    */
 
 }
 
@@ -278,7 +294,7 @@ void initPWM(void) {
     TCCR3B |= (1 << WGM33);
 
     // TOP вредноста = 1000 во ICR3
-    ICR3 = 1000;
+    ICR3 = 1000UL;
 
     // Подеси ги излезните компараторски вредности на 0 - нема излез.
     OCR3A = 0;
@@ -286,4 +302,20 @@ void initPWM(void) {
 
     // Прескалер - N = 8 и почни со броење !
     TCCR3B |= (1 << CS31);
+}
+
+void stegniStegi(unsigned int kodPili) {
+    if(kodPili <= 4) { // Стегни само хоризонтално
+        setOutput(HCLAMP, 1);
+    } else if((kodPili >=5) && (kodPili <= 8)) { // Стегни само вертикално
+        setOutput(VCLAMP, 1);
+    } else if((kodPili >=9) && (kodPili <= 12)) { // Стегни и вертикално и хоризонтално
+        setOutput(HCLAMP, 1);
+        setOutput(VCLAMP, 1);
+    }
+}
+
+void otpustiStegi(void) {
+    setOutput(HCLAMP, 0);
+    setOutput(VCLAMP, 0);
 }
